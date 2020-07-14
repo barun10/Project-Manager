@@ -8,6 +8,6 @@ class AuthController < ApplicationController
     save_in_session data
     flash[:notice] = "You are logged in"
     # redirect_to login_path
-    render('users/demo')
+    redirect_to projects_path
   end
 end

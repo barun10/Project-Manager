@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   post 'login', to: 'users#attempt_login'
   get 'users/logout'
   get "/auth/microsoft_graph_auth/users/logout", to: 'users#logout'
+  resources :projects
 end
