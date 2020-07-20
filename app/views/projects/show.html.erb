@@ -1,4 +1,68 @@
-
-<div class= "text-center font-weight-bold">
+<div class= "text-center font-weight-bold bg-success">
   <%= @project.name%>
 </div>
+
+
+<div id="wrapper">
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li>
+        <a class="current_link">Current</a>
+      </li>
+      <li>
+        <a class="backlog_link">Backlog</a>
+      </li>
+      <li>
+        <a class="icebox_link">Icebox</a>
+      </li>
+    </ul>
+  </div>
+
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-2">
+          <a href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Toggle Menu</a>
+        </div>
+        <div class="col-lg-3 p-0">
+          <div class="card current_card">
+            <div class="card-header">
+              Current Iteration
+              <button type="button" class="close" aria-label="Close" id="current">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="card-body">
+              <button class="btn btn-success">+Add feature</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 p-0">
+          <div class="card backlog_card">
+            <div class="card-header">
+              Backlog
+              <button type="button" class="close" aria-label="Close" id = "backlog">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 p-0">
+          <div class="card icebox_card">
+            <div class="card-header">
+              Icebox
+              <button type="button" class="close" aria-label="Close" id = "icebox">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<%= stylesheet_link_tag "sidenav" %>
+
+<%= javascript_include_tag('sidenavscript.js') %>
