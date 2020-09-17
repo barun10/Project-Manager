@@ -5,7 +5,7 @@ $("#menu-toggle").click(function(e) {
 
 $(document).ready(function(){
   $("#current").click(function(){
-    $(".current_card").hide();
+    $(".current_card").toggle();
   });
   $(".current_link").click(function(){
     $(".current_card").show();
@@ -22,6 +22,24 @@ $(document).ready(function(){
   $(".icebox_link").click(function(){
     $(".icebox_card").show();
   });
+
+  $(".feature_form_current").hide();
+
+  $("button#add_current_feature").click(function(){
+    $(".feature_form_current").toggle();
+  });
+
+  $(".feature_form_backlog").hide();
+
+  $("button#add_backlog_feature").click(function(){
+    $(".feature_form_backlog").toggle();
+  });
+
+
+  $(".feature_form_icebox").hide();
+
+  $("button#add_icebox_feature").click(function(){
+    $(".feature_form_icebox").toggle();
+  });
+
 });
-
-

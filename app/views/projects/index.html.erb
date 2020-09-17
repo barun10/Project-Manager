@@ -1,8 +1,10 @@
+<%= link_to 'logout', users_logout_path,class: 'float-right' %>
 <h1>Project</h1>
 <% @projects.each do |project| %>
-  <%= link_to project.name, project, target: :_blank %>
+  <% if project.user_id == session[:user_id]%>
+    <%= link_to project.name, project, target: :_blank %>
+  <% end %>
   <br />
-
 <% end %> 
 <br />
 

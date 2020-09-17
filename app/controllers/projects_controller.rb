@@ -6,11 +6,13 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    if params[:query]
+      @project.features = Feature.where("ticket_id LIKE ?" ,"%#{params[:query]}%").or(Feature.where("title LIKE ?" ,"%#{params[:query]}%"))
+    end
   end
 
   def new
     @project = Project.new
-
   end
 
   def create
@@ -28,7 +30,6 @@ class ProjectsController < ApplicationController
   end
 
   def update
-
     if @project.update(project_params)
       redirect_to projects_path
     else

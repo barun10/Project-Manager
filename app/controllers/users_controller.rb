@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     if authorized_user
       session[:user_id] = authorized_user.id
       flash[:notice] = "You are logged in"
-      redirect_to projects_path
+      redirect_to users_dashboard_path
     else
       flash[:notice] = "Invalid username/password combination."
       render('login')

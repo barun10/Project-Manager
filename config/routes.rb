@@ -5,8 +5,10 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   post 'users', to: 'users#create'
   get 'login', to: 'users#login'
+  get 'users/dashboard'
   post 'login', to: 'users#attempt_login'
   get 'users/logout'
   get "/auth/microsoft_graph_auth/users/logout", to: 'users#logout'
   resources :projects
+  resources :features
 end

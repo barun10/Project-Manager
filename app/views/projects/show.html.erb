@@ -19,6 +19,12 @@
   </div>
 
   <div id="page-content-wrapper">
+    <div class="m-3 d-flex justify-content-center">
+      <%= form_tag(project_path, method: :get) do %>
+        Feature: <%= text_field_tag :query, params[:query] %>
+        <%= submit_tag 'Search' %>
+      <% end %>
+    </div>
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-2">
@@ -33,7 +39,19 @@
               </button>
             </div>
             <div class="card-body">
-              <button class="btn btn-success">+Add feature</button>
+              <div class="card">
+                <% @project.features.each do |feature| %>
+                  <% if feature.panel_name == "current"%>
+                    Title: <%= feature.title %>
+                    <br>
+                    Ticket Id: <%= feature.ticket_id %>
+                  <% end %>
+                <% end %>
+              </div>
+              <br>
+              Add tasks
+              <br>
+              <a href="/features/new">+Add feature</a>
             </div>
           </div>
         </div>
@@ -45,6 +63,21 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
+            <div class="card-body">
+              <div class="card">
+                <% @project.features.each do |feature| %>
+                  <% if feature.panel_name == "backlog"%>
+                    Title: <%= feature.title %>
+                    <br>
+                    Ticket Id: <%= feature.ticket_id %>
+                  <% end %>
+                <% end %>
+              </div>
+              <br>
+              Add tasks
+              <br>
+              <a href="/features/new">+Add feature</a>
+            </div>
           </div>
         </div>
         <div class="col-lg-3 p-0">
@@ -54,6 +87,21 @@
               <button type="button" class="close" aria-label="Close" id = "icebox">
                 <span aria-hidden="true">&times;</span>
               </button>
+            </div>
+            <div class="card-body">
+              <div class="card">
+                <% @project.features.each do |feature| %>
+                  <% if feature.panel_name == "icebox"%>
+                    Title: <%= feature.title %>
+                    <br>
+                    Ticket Id: <%= feature.ticket_id %>
+                  <% end %>
+                <% end %>
+              </div>
+              <br>
+              Add tasks
+              <br>
+              <a href="/features/new">+Add feature</a>
             </div>
           </div>
         </div>

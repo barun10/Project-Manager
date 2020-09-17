@@ -6,8 +6,8 @@ class AuthController < ApplicationController
   
     # Save the data in the session
     save_in_session data
-    flash[:notice] = "You are logged in"
+    flash[:notice] = "You are logged in via microsoft"
     # redirect_to login_path
-    redirect_to projects_path
+    redirect_to users_dashboard_path
   end
 end
