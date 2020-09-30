@@ -5,6 +5,8 @@ class CreateFeatures < ActiveRecord::Migration[5.2]
       t.string :description
       t.string :panel_name
       t.integer :ticket_id
+      t.string :file
+      t.string :status
       t.belongs_to :project, index: true, foreign_key: true
       t.timestamps
     end

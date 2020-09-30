@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   get "/auth/microsoft_graph_auth/users/logout", to: 'users#logout'
   resources :projects
   resources :features
+  resources :tasks
 end

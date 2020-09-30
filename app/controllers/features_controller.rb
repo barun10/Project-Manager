@@ -1,5 +1,4 @@
 class FeaturesController < ApplicationController
-
     def new
       @feature = Feature.new
     end
@@ -14,10 +13,10 @@ class FeaturesController < ApplicationController
         render :new
       end
     end
-  
+    
     private
 
     def feature_params
-      params.require('feature').permit(:title, :description, :panel_name, :project_id)
+      params.require('feature').permit(:title, :description, :panel_name, :project_id, :file, :status)
     end
 end

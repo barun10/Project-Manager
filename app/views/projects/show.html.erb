@@ -45,11 +45,13 @@
                     Title: <%= feature.title %>
                     <br>
                     Ticket Id: <%= feature.ticket_id %>
+                    <br>
+                    status: <%= feature.status %>
+                    <%= link_to  "Add tasks", new_task_path %>
+                    <%= link_to  "Download", feature.file, download: " "  %>
                   <% end %>
                 <% end %>
               </div>
-              <br>
-              Add tasks
               <br>
               <a href="/features/new">+Add feature</a>
             </div>
@@ -70,11 +72,13 @@
                     Title: <%= feature.title %>
                     <br>
                     Ticket Id: <%= feature.ticket_id %>
+                    <br>
+                    status: <%= feature.status %>
+                    <%= link_to  "Add tasks", new_task_path %>
+                    <%= link_to  "Download", feature.file, download: " "  %>
                   <% end %>
                 <% end %>
               </div>
-              <br>
-              Add tasks
               <br>
               <a href="/features/new">+Add feature</a>
             </div>
@@ -95,11 +99,13 @@
                     Title: <%= feature.title %>
                     <br>
                     Ticket Id: <%= feature.ticket_id %>
+                    <br>
+                    status: <%= feature.status %>
+                    <%= link_to  "Add tasks", new_task_path %>
+                    <%= link_to  "Download", feature.file, download: " " %>
                   <% end %>
                 <% end %>
               </div>
-              <br>
-              Add tasks
               <br>
               <a href="/features/new">+Add feature</a>
             </div>
