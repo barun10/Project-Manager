@@ -106,11 +106,7 @@
                     <br>
                     status: <%= feature.status %>
                     <br>
-
-                    <%= form_for( @project , remote: true) do |f| %>
-                      <%= f.select(:user_id, options_for_select(User.all.collect(&:name)), class: "common") %>
-                      <%= f.submit "Add user" %>
-                    <% end %>
+                    Current User: <%= select_tag(:user_id, options_for_select(User.all.collect(&:name)), class: "common") %>
                     <%= link_to  "Add tasks", new_task_path %>
                     <%= link_to  "Download", feature.file, download: " " %>
                   <% end %>
