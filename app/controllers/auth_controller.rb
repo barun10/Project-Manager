@@ -8,6 +8,11 @@ class AuthController < ApplicationController
     save_in_session data
     flash[:notice] = "You are logged in via microsoft"
     # redirect_to login_path
-    redirect_to users_dashboard_path
+    redirect_to root_path
+  end
+
+  def signout
+    reset_session
+    redirect_to root_path
   end
 end

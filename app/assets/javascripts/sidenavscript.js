@@ -41,5 +41,6 @@ $(document).ready(function(){
   $("button#add_icebox_feature").click(function(){
     $(".feature_form_icebox").toggle();
   });
-
+  
+  $('.common').multiselect();
 });

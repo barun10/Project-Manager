@@ -1,3 +1,3 @@
-ENV['AZURE_APP_ID'] = 'a4ca6050-351f-4089-936f-0caa0408cab9'
-ENV['AZURE_APP_SECRET'] = 'Si335R.w9~ON7v3YMO~VC9Ep7jo~.MAfci'
+ENV['AZURE_APP_ID'] = '0cd2274d-0847-41a8-a751-17a43ba21c70'
+ENV['AZURE_APP_SECRET'] = '81UijU8if5eM-N5~AYgo-Uonx7_WDuU_YM'
 ENV['AZURE_SCOPES'] = 'openid profile email offline_access user.read calendars.read'

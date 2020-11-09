@@ -29,18 +29,13 @@ class UsersController < ApplicationController
     if authorized_user
       session[:user_id] = authorized_user.id
       flash[:notice] = "You are logged in"
-      redirect_to users_dashboard_path
+      redirect_to root_path
     else
       flash[:notice] = "Invalid username/password combination."
       render('login')
     end  
   end
 
-  def logout
-    session[:user_id] = nil
-    flash[:notice] = "logged out"
-    redirect_to(root_path)
-	end	
   private
 
     def user_params

@@ -47,6 +47,8 @@
                     Ticket Id: <%= feature.ticket_id %>
                     <br>
                     status: <%= feature.status %>
+                    <br>
+                    Current User: <%= select_tag(:user_id, options_for_select(User.all.collect(&:name)), class: "common") %>
                     <%= link_to  "Add tasks", new_task_path %>
                     <%= link_to  "Download", feature.file, download: " "  %>
                   <% end %>
@@ -74,6 +76,8 @@
                     Ticket Id: <%= feature.ticket_id %>
                     <br>
                     status: <%= feature.status %>
+                    <br>
+                    Current User: <%= select_tag(:user_id, options_for_select(User.all.collect(&:name)), class: "common") %>
                     <%= link_to  "Add tasks", new_task_path %>
                     <%= link_to  "Download", feature.file, download: " "  %>
                   <% end %>
@@ -101,6 +105,12 @@
                     Ticket Id: <%= feature.ticket_id %>
                     <br>
                     status: <%= feature.status %>
+                    <br>
+
+                    <%= form_for( @project , remote: true) do |f| %>
+                      <%= f.select(:user_id, options_for_select(User.all.collect(&:name)), class: "common") %>
+                      <%= f.submit "Add user" %>
+                    <% end %>
                     <%= link_to  "Add tasks", new_task_path %>
                     <%= link_to  "Download", feature.file, download: " " %>
                   <% end %>
@@ -118,5 +128,7 @@
 </div>
 
 <%= stylesheet_link_tag "sidenav" %>
+<%= javascript_include_tag "sidenavscript.js" %>
+<%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/js/bootstrap-multiselect.js" %>
 
-<%= javascript_include_tag('sidenavscript.js') %>
+<%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/css/bootstrap-multiselect.css" %>
