@@ -1,0 +1,27 @@
+<div class="card">
+    Title: <%= @feature.title %>
+    <br>
+    <br>
+
+    Description: <%= @feature.description %>
+    <br>
+    <br>
+
+    Ticket Id: <%= @feature.ticket_id %>
+    <br>
+    <br>
+    Status: <%= @feature.status %>
+    <br>
+    <br>
+    Project_id: <%= @feature.project_id%>
+    <br>
+    <br>
+    Current user: <%= @feature.current_user %>
+    
+    <%= link_to  "Download", @feature.file, download: " " %>
+</div>
+
+<div>
+  <%= link_to  "edit", edit_project_feature_path(@project, @feature) %>
+  <%= link_to 'destroy', [@project, @feature], method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>

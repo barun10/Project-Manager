@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   post 'users', to: 'users#create'
   get 'login', to: 'users#login'
   post 'login', to: 'users#attempt_login'
-  resources :projects
-  resources :features
+  resources :projects do
+    resources :features
+  end
   resources :tasks
 end
