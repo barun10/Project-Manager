@@ -41,14 +41,13 @@
             </div>
             <div class="card-body">
               <% @project.features.each do |feature| %>
-                <% @feature = feature %>
                 <% if feature.panel_name == "current"%>
                   <div class="border m-2 ">
                     Title: <%= feature.title %>
                     <br>
                     status: <%= feature.status %>
                     <br>
-                    <%= link_to  "Show", [feature.project, feature] %>
+                    <%= link_to  "Show", [@project, feature] %>
                   </div>
                 <% end %>
               <% end %>
@@ -69,14 +68,13 @@
             </div>
             <div class="card-body">
               <% @project.features.each do |feature| %>
-                <% @feature = feature %>
                 <% if feature.panel_name == "backlog"%>
                   <div class="border">
                     Title: <%= feature.title %>
                     <br>
                     status: <%= feature.status %>
                     <br>
-                    <%= link_to  "Show", [feature.project, feature]  %>
+                    <%= link_to  "Show", [@project, feature]  %>
                   </div>
                 <% end %>
               <% end %>
@@ -97,14 +95,13 @@
             </div>
             <div class="card-body">
               <% @project.features.each do |feature| %>
-                <% @feature = feature %>
                 <% if feature.panel_name == "icebox"%>
                   <div class="border">
                     Title: <%= feature.title %>
                     <br>
                     status: <%= feature.status %>
                     <br>
-                    <%= link_to  "Show", [feature.project, feature] %>
+                    <%= link_to  "Show", [@project, feature] %>
                   </div>
                 <% end %>
               <% end %>

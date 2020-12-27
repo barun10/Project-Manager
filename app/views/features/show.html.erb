@@ -2,11 +2,9 @@
     Title: <%= @feature.title %>
     <br>
     <br>
-
     Description: <%= @feature.description %>
     <br>
     <br>
-
     Ticket Id: <%= @feature.ticket_id %>
     <br>
     <br>
@@ -25,3 +23,52 @@
   <%= link_to  "edit", edit_project_feature_path(@project, @feature) %>
   <%= link_to 'destroy', [@project, @feature], method: :delete, data: { confirm: 'Are you sure?' } %>
 </div>
+
+
+
+<div>
+  <h1>Tasks (<%= @tasks.completed.count%>/<%= @tasks.count%>)</h1>
+  <% @tasks.each do |task|%>
+    <% if task.status %>
+      <strike>
+        <%= task.description %>
+      </strike>
+      <%= form_for task do |f| %>
+
+        <%= f.check_box :status, value: task.status %>
+        
+        <%= f.submit("Undo") %>
+      <% end %>
+      <%= link_to 'destroy', task , method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% else %>
+      <%= task.description %>
+      <%= form_for task do |f| %>
+
+        <%= f.check_box :status, value: task.status %>
+        
+        <%= f.submit("Done") %>
+      <% end %>
+      <%= link_to 'destroy', task , method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+    <br>
+    
+  <% end %>
+</div>
+<br>
+<br>
+<div>
+  <%= form_for @task do |f| %>
+    <p><%= f.text_field :description, placeholder: "Enter your task" %></p>
+
+    
+    <%= f.hidden_field :feature_id, value: @feature.id  %>
+    
+    <%= f.submit("Add Task") %>
+  <% end %>
+</div>
+
+
+
+
+
+

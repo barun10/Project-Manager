@@ -6,12 +6,9 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
     if params[:query]
       @project.features = Feature.where("ticket_id LIKE ?" ,"%#{params[:query]}%").or(Feature.where("title LIKE ?" ,"%#{params[:query]}%"))
     end
-
-    @features = @project.features
   end
 
   def new
