@@ -36,6 +36,7 @@
       <%= form_for task do |f| %>
 
         <%= f.check_box :status, value: task.status %>
+        <%= f.text_field :description, placeholder: "Edit task" %>
         
         <%= f.submit("Undo") %>
       <% end %>
@@ -45,6 +46,7 @@
       <%= form_for task do |f| %>
 
         <%= f.check_box :status, value: task.status %>
+        <%= f.text_field :description, placeholder: "Edit task" %>
         
         <%= f.submit("Done") %>
       <% end %>
