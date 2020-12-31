@@ -70,8 +70,7 @@
     <%= f.submit("Add Task") %>
   <% end %>
 </div>
-
-<script>
+<%= javascript_tag do %>
   x = <%= @usernames %>
-  $('.mention').atwho({at:"@", 'data':x});
-</script>
+<% end %>
+<%= javascript_include_tag 'mention.js' %>
