@@ -29,6 +29,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap', '~> 4.4'
 gem 'jquery-rails'
 gem 'client_side_validations'
+gem 'jquery-atwho-rails'
+gem 'ruby-json', '~> 1.1', '>= 1.1.2'
 # OAuth
 gem 'omniauth-oauth2', '~> 1.6'
 # OmniAuth CSRF protection

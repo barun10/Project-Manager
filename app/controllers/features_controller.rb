@@ -1,3 +1,5 @@
+require 'erb'
+
 class FeaturesController < ApplicationController
   before_action :set_project
   before_action :set_feature, only: [:show, :edit, :update, :destroy]
@@ -19,6 +21,7 @@ class FeaturesController < ApplicationController
   def show
     @task = Task.new
     @tasks = @feature.tasks
+    @usernames = User.pluck(:name).to_json.html_safe
   end
 
   def edit

@@ -24,8 +24,6 @@
   <%= link_to 'destroy', [@project, @feature], method: :delete, data: { confirm: 'Are you sure?' } %>
 </div>
 
-
-
 <div>
   <h1>Tasks (<%= @tasks.completed.count%>/<%= @tasks.count%>)</h1>
   <% @tasks.each do |task|%>
@@ -33,21 +31,28 @@
       <strike>
         <%= task.description %>
       </strike>
+      <br>
+      Comment:
+      <br>
+      <%= task.body.to_s.tr('@','') %>
       <%= form_for task do |f| %>
-
         <%= f.check_box :status, value: task.status %>
         <%= f.text_field :description, placeholder: "Edit task" %>
-        
+        Comment: <%= f.text_field :body, placeholder: "Add Comment", class: "mention"%>
         <%= f.submit("Undo") %>
       <% end %>
       <%= link_to 'destroy', task , method: :delete, data: { confirm: 'Are you sure?' } %>
     <% else %>
       <%= task.description %>
+      <br>
+      Comment:
+      <br>
+      <%= task.body.to_s.tr('@','') %>
       <%= form_for task do |f| %>
 
         <%= f.check_box :status, value: task.status %>
         <%= f.text_field :description, placeholder: "Edit task" %>
-        
+        Comment: <%= f.text_field :body, placeholder: "Add Comment", class: "mention" %>
         <%= f.submit("Done") %>
       <% end %>
       <%= link_to 'destroy', task , method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -61,16 +66,12 @@
 <div>
   <%= form_for @task do |f| %>
     <p><%= f.text_field :description, placeholder: "Enter your task" %></p>
-
-    
     <%= f.hidden_field :feature_id, value: @feature.id  %>
-    
     <%= f.submit("Add Task") %>
   <% end %>
 </div>
 
-
-
-
-
-
+<script>
+  x = <%= @usernames %>
+  $('.mention').atwho({at:"@", 'data':x});
+</script>
