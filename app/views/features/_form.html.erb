@@ -1,11 +1,11 @@
 <%= form_with(model: [@project, @feature], local: true) do |f| %>
   <div class="form-group">
-    <%= f.label :title, class: "text-white"%>
+    <%= f.label :title %>
     <%= f.text_field :title, class: "form-control shadow rounded", placeholder: "Enter your title" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :description, class: "text-white"%>
+    <%= f.label :description %>
     <%= f.text_field :description, class: "form-control shadow rounded", placeholder: "Enter description" %>
   </div>
 
@@ -14,37 +14,32 @@
   </div> 
 
   <div class="form-group">
-    <%= f.label :panel, class: "text-white"%>
+    <%= f.label :panel %>
     <br>
     <%= f.select :panel_name, options_for_select([['current', 'current'], ['icebox', 'icebox'], ['backlog', 'backlog']]) %>
   </div> 
 
   <div class="form-group">
-    <%= f.label :file, class: "text-white"%>
+    <%= f.label :file %>
     <br>
     <%= f.file_field :file %>
   </div>
 
   <div class="form-group">
-    <%= f.label :status, class: "text-white"%>
+    <%= f.label :status %>
     <br>
     <%= f.select :status, options_for_select([['Started', 'Started'], ['Finished', 'Finished'], ['Delivered', 'Delivered']]) %>
   </div> 
     
   <div class="form-group">
-    <%= f.label :current_user, class: "text-white"%>
-    <br>
-    <%= f.select :current_user, options_for_select(User.all.collect {|user| [user.name] }), class: "common" %>
+    Users: <%= select_tag("users[]", options_for_select(@users.collect { |ff| [ff.name, ff.id] }, @feature.users.collect { |fs| fs.id }),
+      {:multiple=>true, :id => "users"}) %>
   </div>
 
   <div class="form-group">
     <%= f.submit("Save",class: "btn btn-success btn-lg") %>
   </div>
 <% end %>
-
-
-<%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/js/bootstrap-multiselect.min.js" %>
-
 <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/css/bootstrap-multiselect.min.css" %>
-
-<%= javascript_include_tag "sidenavscript.js" %>
+<%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/js/bootstrap-multiselect.min.js" %>
+<%= javascript_include_tag 'multiple.js' %>

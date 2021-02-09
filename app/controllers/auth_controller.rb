@@ -1,17 +1,20 @@
 class AuthController < ApplicationController
-  skip_before_action :set_user
   def callback
-    # Access the authentication hash for omniauth
-    data = request.env['omniauth.auth']
-    # Save the data in the session
-    save_in_session data
-    flash[:notice] = "You are logged in via microsoft"
-    # redirect_to login_path
-    redirect_to root_path
+    # current_user ||= User.find_by(id: session[:user_id])
+    @user = User.find_by(id: session[:user_id])
+    ms_account = @user.ms_accounts.where(username: auth.dig(:extra, :raw_info, :displayName)).first_or_initialize
+    ms_account.update(
+      # name: auth_hash.dig(:extra, :raw_info, :displayName),
+      # image: auth.info.image,
+      token: auth.credentials.token,
+      secret: auth.credentials.secret
+    )
+
+    redirect_to root_path, notice: "Successfully connected your account"
   end
 
-  def signout
-    reset_session
-    redirect_to root_path
+  def auth
+    request.env['omniauth.auth']
   end
+
 end

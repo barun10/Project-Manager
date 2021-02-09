@@ -1,0 +1,11 @@
+<%= form_for @comment do |f| %>
+  <p><%= f.text_field :comment, class: "mention" %></p>
+  <%= f.hidden_field :feature_id, value: @comment.feature_id  %>
+  <%= f.hidden_field :user_id, value: session[:user_id]  %>
+  <%= f.submit("Edit Comment") %>
+<% end %>
+
+<%= javascript_tag do %>
+  x = <%= @usernames %>
+<% end %>
+<%= javascript_include_tag 'mention.js' %>

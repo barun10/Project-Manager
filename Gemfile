@@ -31,14 +31,18 @@ gem 'jquery-rails'
 gem 'client_side_validations'
 gem 'jquery-atwho-rails'
 gem 'ruby-json', '~> 1.1', '>= 1.1.2'
-# OAuth
+gem 'notifications', '~> 1.1'
+
+
+
 gem 'omniauth-oauth2', '~> 1.6'
-# OmniAuth CSRF protection
 gem 'omniauth-rails_csrf_protection', '~> 0.1.2'
-# REST calls to Microsoft Graph
 gem 'httparty', '~> 0.17.1'
 # Session storage in database
 gem 'activerecord-session_store', '~> 1.1'
+# gem 'omniauth-microsoft_graph', '~> 0.3.3'
+# gem 'activerecord-session_store', '~> 1.1', '>= 1.1.3'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 gem 'bootstrap-multiselect-rails'

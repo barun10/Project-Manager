@@ -1,3 +1,4 @@
+<%# FEATURE attributes are printed here%>
 <div class="card">
     Title: <%= @feature.title %>
     <br>
@@ -14,8 +15,8 @@
     Project_id: <%= @feature.project_id%>
     <br>
     <br>
-    Current user: <%= @feature.current_user %>
-    
+    Users: <%=h @feature.users.collect {|r| r.name}.join(', ') %>
+
     <%= link_to  "Download", @feature.file, download: " " %>
 </div>
 
@@ -24,6 +25,8 @@
   <%= link_to 'destroy', [@project, @feature], method: :delete, data: { confirm: 'Are you sure?' } %>
 </div>
 
+<%# TASK attributes are printed here%>
+
 <div>
   <h1>Tasks (<%= @tasks.completed.count%>/<%= @tasks.count%>)</h1>
   <% @tasks.each do |task|%>
@@ -31,28 +34,18 @@
       <strike>
         <%= task.description %>
       </strike>
-      <br>
-      Comment:
-      <br>
-      <%= task.body.to_s.tr('@','') %>
       <%= form_for task do |f| %>
         <%= f.check_box :status, value: task.status %>
         <%= f.text_field :description, placeholder: "Edit task" %>
-        Comment: <%= f.text_field :body, placeholder: "Add Comment", class: "mention"%>
         <%= f.submit("Undo") %>
       <% end %>
       <%= link_to 'destroy', task , method: :delete, data: { confirm: 'Are you sure?' } %>
     <% else %>
       <%= task.description %>
-      <br>
-      Comment:
-      <br>
-      <%= task.body.to_s.tr('@','') %>
       <%= form_for task do |f| %>
 
         <%= f.check_box :status, value: task.status %>
         <%= f.text_field :description, placeholder: "Edit task" %>
-        Comment: <%= f.text_field :body, placeholder: "Add Comment", class: "mention" %>
         <%= f.submit("Done") %>
       <% end %>
       <%= link_to 'destroy', task , method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -63,6 +56,8 @@
 </div>
 <br>
 <br>
+
+<%# TASK OBJECT created here %>
 <div>
   <%= form_for @task do |f| %>
     <p><%= f.text_field :description, placeholder: "Enter your task" %></p>
@@ -70,6 +65,35 @@
     <%= f.submit("Add Task") %>
   <% end %>
 </div>
+
+<br>
+<br>
+<%# COMMENT attributes are printed here%>
+
+<div>
+  <h5>Comments</h5>
+  <% @comments.each do |comment|%>
+      <b><%= comment.user.name%></b>:
+      <br>
+      <%= comment.comment.to_s.tr('@','') %>
+      <%= link_to 'edit', edit_comment_path(comment) %>
+      <%= link_to 'delete', comment , method: :delete, data: { confirm: 'Are you sure?' } %>
+      <br>
+  <% end %>
+</div>
+
+<div>
+  <%= form_for @comment do |f| %>
+    <p><%= f.text_field :comment, placeholder: "Enter your comment", class: "mention" %></p>
+    <%= f.hidden_field :feature_id, value: @feature.id  %>
+    <%= f.hidden_field :user_id, value: session[:user_id]  %>
+    <%= f.submit("Add Comment") %>
+  <% end %>
+</div>
+
+
+
+
 <%= javascript_tag do %>
   x = <%= @usernames %>
 <% end %>
