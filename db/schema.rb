@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2021_01_30_153655) do
   end
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.text "comment"
+    t.text "comment", null: false
     t.bigint "user_id"
     t.bigint "feature_id"
     t.datetime "created_at", null: false
@@ -45,11 +45,11 @@ ActiveRecord::Schema.define(version: 2021_01_30_153655) do
 
   create_table "features", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
-    t.string "description"
+    t.string "description", null: false
     t.string "panel_name", null: false
-    t.integer "ticket_id"
+    t.integer "ticket_id", null: false
     t.string "file"
-    t.string "status"
+    t.string "status", null: false
     t.bigint "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -82,9 +82,10 @@ ActiveRecord::Schema.define(version: 2021_01_30_153655) do
 
   create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "sessions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -97,7 +98,7 @@ ActiveRecord::Schema.define(version: 2021_01_30_153655) do
   end
 
   create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "description"
+    t.string "description", null: false
     t.boolean "status"
     t.bigint "feature_id"
     t.datetime "created_at", null: false
@@ -117,5 +118,6 @@ ActiveRecord::Schema.define(version: 2021_01_30_153655) do
   add_foreign_key "comments", "features"
   add_foreign_key "comments", "users"
   add_foreign_key "features", "projects"
+  add_foreign_key "projects", "users"
   add_foreign_key "tasks", "features"
 end

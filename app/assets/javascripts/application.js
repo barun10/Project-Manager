@@ -19,3 +19,4 @@
 //= require bootstrap-sprockets
 //= require rails.validations
 //= require jquery.atwho
+//= require rails.validations

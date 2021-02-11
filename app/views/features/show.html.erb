@@ -1,4 +1,3 @@
-<%# FEATURE attributes are printed here%>
 <div class="card">
     Title: <%= @feature.title %>
     <br>
@@ -12,10 +11,10 @@
     Status: <%= @feature.status %>
     <br>
     <br>
-    Project_id: <%= @feature.project_id%>
+    Project_id: <%= @feature.project_id %>
     <br>
     <br>
-    Users: <%=h @feature.users.collect {|r| r.name}.join(', ') %>
+    Users: <%= h @feature.users.collect {|r| r.name}.join(', ') %>
 
     <%= link_to  "Download", @feature.file, download: " " %>
 </div>
@@ -25,41 +24,46 @@
   <%= link_to 'destroy', [@project, @feature], method: :delete, data: { confirm: 'Are you sure?' } %>
 </div>
 
-<%# TASK attributes are printed here%>
 
 <div>
-  <h1>Tasks (<%= @tasks.completed.count%>/<%= @tasks.count%>)</h1>
-  <% @tasks.each do |task|%>
+  <h1>Tasks (<%= @tasks.completed.count%>/<%= @tasks.count %>)</h1>
+  <% @tasks.each do |task| %>
     <% if task.status %>
       <strike>
         <%= task.description %>
       </strike>
-      <%= form_for task do |f| %>
-        <%= f.check_box :status, value: task.status %>
-        <%= f.text_field :description, placeholder: "Edit task" %>
-        <%= f.submit("Undo") %>
-      <% end %>
-      <%= link_to 'destroy', task , method: :delete, data: { confirm: 'Are you sure?' } %>
     <% else %>
       <%= task.description %>
-      <%= form_for task do |f| %>
-
-        <%= f.check_box :status, value: task.status %>
-        <%= f.text_field :description, placeholder: "Edit task" %>
-        <%= f.submit("Done") %>
-      <% end %>
-      <%= link_to 'destroy', task , method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
     <br>
-    
+    <%= form_for task, validate: true do |f| %>
+      <%= f.check_box :status, value: task.status %>
+      <%= f.text_field :description, placeholder: "Edit task" %>
+      <% if task.status %>
+        <%= f.submit("Undo") %>
+      <% else %>
+        <%= f.submit("Done") %>
+      <% end %>
+    <% end %>
+    <%= link_to 'destroy', task , method: :delete, data: { confirm: 'Are you sure?' } %> 
+    <br>   
   <% end %>
+  <br>
+    
 </div>
 <br>
 <br>
 
-<%# TASK OBJECT created here %>
 <div>
-  <%= form_for @task do |f| %>
+  <%= form_for @task, validate: true do |f| %>
+    <% if @task.errors.any? %>
+      <h2>Errors: </h2>
+      <ul>
+        <% @task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>  
+    <% end %>
     <p><%= f.text_field :description, placeholder: "Enter your task" %></p>
     <%= f.hidden_field :feature_id, value: @feature.id  %>
     <%= f.submit("Add Task") %>
@@ -68,22 +72,31 @@
 
 <br>
 <br>
-<%# COMMENT attributes are printed here%>
 
 <div>
   <h5>Comments</h5>
-  <% @comments.each do |comment|%>
-      <b><%= comment.user.name%></b>:
+  <% @comments.each do |comment| %>
+      <b><%= comment.user.name %></b>:
       <br>
       <%= comment.comment.to_s.tr('@','') %>
-      <%= link_to 'edit', edit_comment_path(comment) %>
-      <%= link_to 'delete', comment , method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% if current_user == comment.user %>
+        <%= link_to 'edit', edit_comment_path(comment) %>
+        <%= link_to 'delete', comment , method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
       <br>
   <% end %>
 </div>
 
 <div>
-  <%= form_for @comment do |f| %>
+  <%= form_for @comment, validate: true do |f| %>
+    <% if @comment.errors.any? %>
+      <h2>Errors: </h2>
+      <ul>
+          <% @comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>  
+    <% end %>
     <p><%= f.text_field :comment, placeholder: "Enter your comment", class: "mention" %></p>
     <%= f.hidden_field :feature_id, value: @feature.id  %>
     <%= f.hidden_field :user_id, value: session[:user_id]  %>

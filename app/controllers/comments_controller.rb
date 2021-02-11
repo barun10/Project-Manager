@@ -1,46 +1,53 @@
 class CommentsController < ApplicationController
+  before_action :set_comment, only: [:edit, :update, :destroy]
+  before_action :set_usernames, only: [:edit, :update]
+  before_action :set_feature, only: [:update, :destroy]
   def create
     @comment = Comment.new(comment_params)
-    @feature = @comment.feature
+    set_feature
     if @comment.save
-      @feature.users.each do |user|
-        CommentMailer.with(feature: @feature, user: user, comment: @comment).comment_added_or_edited.deliver_later
-      end
-      redirect_to project_feature_path(@feature.project_id, @comment.feature_id)
-    else
-      redirect_to root_path
+      mail_comment
+      redirect_to project_feature_path(@feature.project_id, @comment.feature_id), flash: { success: "new comment added" }
     end
   end
+
   def edit
-    @comment = Comment.find(params[:id])
-    @usernames = @comment.feature.users.pluck(:name).to_json.html_safe
   end
 
   def update
-    @comment = Comment.find(params[:id])
-    @usernames = @comment.feature.users.pluck(:name).to_json.html_safe
-    @feature = @comment.feature
+    set_feature
     if @comment.update(comment_params)
-      @feature.users.each do |user|
-        CommentMailer.with(feature: @feature, user: user, comment: @comment).comment_added_or_edited.deliver_later
-      end
-      redirect_to project_feature_path(@comment.feature.project_id, @comment.feature_id)
-    else
-      redirect_to root_path
+      mail_comment
+      redirect_to project_feature_path(@feature.project_id, @comment.feature_id), flash: { notice: "comment deleted" }
     end
   end
   
   
   def destroy
-    @comment = Comment.find(params[:id])
-    @feature = @comment.feature
     @comment.destroy
-    redirect_to project_feature_path(@feature.project_id, @comment.feature_id)
-    flash[:notice] = 'Feature was successfully destroyed.'
+    redirect_to project_feature_path(@feature.project_id, @comment.feature_id), flash: { notice: "comment deleted" }
   end
   
   private
 
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
+  
+  def set_feature
+    @feature = @comment.feature
+  end
+  
+  def set_usernames
+    @usernames = @comment.feature.users.pluck(:name).to_json.html_safe
+  end
+
+  def mail_comment
+    @feature.users.each do |user|
+      CommentMailer.with(feature: @feature, user: user, comment: @comment).comment_added_or_edited.deliver_later
+    end
+  end
+  
   def comment_params
     params.require('comment').permit(:comment, :feature_id, :user_id)
   end

@@ -2,7 +2,11 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :feature
 
+  validates :comment, presence: true
+  
   after_commit :create_notifications, on: [:create, :update]
+
+
   def create_notifications
     self.feature.users.each do |user|
       Notification.create(notify_type: 'comment', actor: self.user,

@@ -1,12 +1,4 @@
 <div>
   <h4>Add your project here</h4>
-  <%= form_for(@project, class: "shadow p-3 mb-3 bg-dark rounded", local: true) do |f| %>
-    <div class="form-group">
-      <%= f.label :name, class: "col-2 col-form-label text-light" %>
-      <%= f.text_field :name, class: "form-control shadow rounded", placeholder: "Enter a project name" %>
-    </div>
-    <div class="form-group row justify-content-center">
-      <%= f.submit("Save",class: "btn btn-success btn-lg") %>
-    </div>
-  <% end %>
+  <%= render 'form' %>
 </div>

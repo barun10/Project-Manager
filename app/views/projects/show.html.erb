@@ -1,7 +1,3 @@
-<div class= "text-center font-weight-bold bg-success">
-  <%= @project.name%>
-</div>
-
 <div id="wrapper">
   <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
@@ -24,94 +20,92 @@
         <%= submit_tag 'Search' %>
       <% end %>
     </div>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-2">
-          <a href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Toggle Menu</a>
-        </div>
-
-
-        <div class="col-lg-3 p-0">
-          <div class="card current_card">
-            <div class="card-header">
-              Current Iteration
-              <button type="button" class="close" aria-label="Close" id="current">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="card-body">
-              <% @project.features.each do |feature| %>
-                <% if feature.panel_name == "current"%>
-                  <div class="border m-2 ">
-                    Title: <%= feature.title %>
-                    <br>
-                    status: <%= feature.status %>
-                    <br>
-                    <%= link_to  "Show", [@project, feature] %>
-                  </div>
-                <% end %>
-              <% end %>
-            </div>
-            <br>
-            <%= link_to  "+ Add Feature", new_project_feature_path(@project) %>
-          </div>
-        </div>
-
-
-        <div class="col-lg-3 p-0">
-          <div class="card backlog_card">
-            <div class="card-header">
-              Backlog
-              <button type="button" class="close" aria-label="Close" id="backlog">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="card-body">
-              <% @project.features.each do |feature| %>
-                <% if feature.panel_name == "backlog"%>
-                  <div class="border">
-                    Title: <%= feature.title %>
-                    <br>
-                    status: <%= feature.status %>
-                    <br>
-                    <%= link_to  "Show", [@project, feature]  %>
-                  </div>
-                <% end %>
-              <% end %>
-            </div>
-            <br>
-            <%= link_to  "+ Add Feature", new_project_feature_path(@project) %>
-          </div>
-        </div>
-
-
-        <div class="col-lg-3 p-0">
-          <div class="card icebox_card">
-            <div class="card-header">
-              Icebox
-              <button type="button" class="close" aria-label="Close" id="icebox">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="card-body">
-              <% @project.features.each do |feature| %>
-                <% if feature.panel_name == "icebox"%>
-                  <div class="border">
-                    Title: <%= feature.title %>
-                    <br>
-                    status: <%= feature.status %>
-                    <br>
-                    <%= link_to  "Show", [@project, feature] %>
-                  </div>
-                <% end %>
-              <% end %>
-            </div>
-            <br>
-            <%= link_to  "+ Add Feature", new_project_feature_path(@project) %>
-          </div>
-        </div>
-
+    <div class="row">
+      <div class="col-lg-2">
+        <a href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Toggle Menu</a>
       </div>
+
+
+      <div class="col-lg-3 p-0">
+        <div class="card current_card">
+          <div class="card-header">
+            Current Iteration
+            <button type="button" class="close" aria-label="Close" id="current">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <% @project.features.each do |feature| %>
+              <% if feature.panel_name == "current" %>
+                <div class="border m-2 ">
+                  Title: <%= feature.title %>
+                  <br>
+                  status: <%= feature.status %>
+                  <br>
+                  <%= link_to  "Show", [@project, feature] %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <br>
+          <%= link_to  "+ Add Feature", new_project_feature_path(@project) %>
+        </div>
+      </div>
+
+
+      <div class="col-lg-3 p-0">
+        <div class="card backlog_card">
+          <div class="card-header">
+            Backlog
+            <button type="button" class="close" aria-label="Close" id="backlog">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <% @project.features.each do |feature| %>
+              <% if feature.panel_name == "backlog" %>
+                <div class="border">
+                  Title: <%= feature.title %>
+                  <br>
+                  status: <%= feature.status %>
+                  <br>
+                  <%= link_to  "Show", [@project, feature] %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <br>
+          <%= link_to  "+ Add Feature", new_project_feature_path(@project) %>
+        </div>
+      </div>
+
+
+      <div class="col-lg-3 p-0">
+        <div class="card icebox_card">
+          <div class="card-header">
+            Icebox
+            <button type="button" class="close" aria-label="Close" id="icebox">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <% @project.features.each do |feature| %>
+              <% if feature.panel_name == "icebox" %>
+                <div class="border">
+                  Title: <%= feature.title %>
+                  <br>
+                  status: <%= feature.status %>
+                  <br>
+                  <%= link_to  "Show", [@project, feature] %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <br>
+          <%= link_to  "+ Add Feature", new_project_feature_path(@project) %>
+        </div>
+      </div>
+
     </div>
   </div>
 

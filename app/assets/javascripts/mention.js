@@ -1,1 +1,1 @@
-$('.mention').atwho({at:"@", 'data':x});
+$('.mention').atwho({ at:"@", 'data':x });

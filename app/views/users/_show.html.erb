@@ -1,17 +1,15 @@
-<div class="container">
-  <h4>Hi, <%= current_user.name %>!</h4>
+<h4>Hi, <%= current_user.name %>!</h4>
+<br>
+<%= link_to pluralize(Notification.unread_count(current_user), 'Notification'), notifications_path %>
+<br>  
+<%= link_to 'My projects', projects_path %>
+<br>
+<br>
+<p>Associated features</p>
+<% current_user.features.each do |feature| %>
+  <%= link_to feature.title, project_feature_path(feature.project_id, feature.id) %>
   <br>
-  <%= link_to pluralize(Notification.unread_count(current_user), 'Notification'), notifications_path %>
-  <br>  
-  <%= link_to 'My projects', projects_path %>
-  <br>
-  <br>
-  <p>Associated features</p>
-  <% current_user.features.each do |feature| %>
-    <%= link_to feature.title, project_feature_path(feature.project_id, feature.id) %>
-    <br>
-  <% end %>
-  <br>
-  <br>
-  <%= link_to 'Log out', logout_path%>
-</div>
+<% end %>
+<br>
+<br>
+<%= link_to 'Log out', logout_path%>

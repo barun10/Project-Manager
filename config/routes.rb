@@ -8,9 +8,9 @@ Rails.application.routes.draw do
   post 'login', to:'sessions#create'
   get 'logout', to: 'sessions#destroy'
   resources :projects do
-    resources :features
+    resources :features, except: [:index]
   end
-  resources :tasks
-  resources :comments
+  resources :tasks, only: [:create, :update, :destroy]
+  resources :comments, except: [:index, :show, :new]
 
 end

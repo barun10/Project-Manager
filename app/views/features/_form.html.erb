@@ -1,4 +1,13 @@
-<%= form_with(model: [@project, @feature], local: true) do |f| %>
+<%= form_with(model: [@project, @feature], local: true, validate: true) do |f| %>
+    <% if @feature.errors.any? %>
+      <h2>Errors: </h2>
+      <ul>
+        <% @feature.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>  
+    <% end %>
+
   <div class="form-group">
     <%= f.label :title %>
     <%= f.text_field :title, class: "form-control shadow rounded", placeholder: "Enter your title" %>
@@ -32,7 +41,7 @@
   </div> 
     
   <div class="form-group">
-    Users: <%= select_tag("users[]", options_for_select(@users.collect { |ff| [ff.name, ff.id] }, @feature.users.collect { |fs| fs.id }),
+    Users: <%= select_tag("users[]", options_for_select(@users.map { |ff| [ff.name, ff.id] }, @feature.users.map { |fs| fs.id }),
       {:multiple=>true, :id => "users"}) %>
   </div>
 

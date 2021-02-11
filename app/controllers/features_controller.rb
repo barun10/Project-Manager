@@ -1,9 +1,10 @@
 class FeaturesController < ApplicationController
   before_action :set_project
   before_action :set_feature, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:new, :create, :edit, :update]
+
   def new
     @feature = @project.features.build
-    @users = User.all
   end
   
   def create
@@ -11,10 +12,9 @@ class FeaturesController < ApplicationController
     @feature.ticket_id = Integer(rand.to_s[2..9])
     @feature.users << User.find(params[:users]) unless params[:users].nil?
     if @feature.save
-      redirect_to project_path(@project)
+      redirect_to project_path(@project), flash: { success: "new feature added" }
     else
-      flash[:error] = "no save"
-      render :new
+      render :new, flash: { error: "feature not saved" }
     end
   end
 
@@ -27,7 +27,6 @@ class FeaturesController < ApplicationController
   end
 
   def edit
-    @users = User.all
   end
 
   def update
@@ -37,8 +36,7 @@ class FeaturesController < ApplicationController
     @old_status = @feature.status
     if @feature.update(feature_params)
       send_feature_status_change_email
-      flash[:success] = "feature updated successfully"
-      redirect_to project_path(@project)
+      redirect_to project_path(@project), flash: { success: "feature updated successfully" }
     else
       render :edit
     end
@@ -47,8 +45,7 @@ class FeaturesController < ApplicationController
     
   def destroy
     @feature.destroy
-    redirect_to project_path(@project)
-    flash[:notice] = 'Feature was successfully destroyed.'
+    redirect_to project_path(@project), flash: { notice: 'Feature was successfully destroyed.' }
   end
 
   private
@@ -65,6 +62,9 @@ class FeaturesController < ApplicationController
     @project = Project.find(params[:project_id])
   end
 
+  def set_user
+    @users = User.all
+  end
   def send_feature_status_change_email
     if @feature.status != @old_status
       @feature.users.each  do |user|

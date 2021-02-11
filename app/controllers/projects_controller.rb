@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_action :require_login
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   def index
-      @projects = Project.all
+      @projects = current_user.projects
   end
 
   def show
@@ -19,9 +19,9 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.user_id = session[:user_id]
     if @project.save
-      redirect_to projects_path
+      redirect_to projects_path, flash: { success: "Project successfully created." }
     else
-      render :new
+      render :new, flash: { error: "Project not saved" }
     end
   end
 
@@ -30,17 +30,15 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-        redirect_to projects_path
-        flash[:notice] =  'Project was successfully updated.'
+        redirect_to projects_path, flash: { success: "Project successfully updated" }
     else
-        render :edit
+        render :edit, flash: { error: "Project not updated" }
     end
   end
 
   def destroy
     @project.destroy
-    redirect_to projects_path
-    flash[:notice] = 'Project was successfully destroyed.'
+    redirect_to projects_path, flash: { notice: "Project successfully destroyed " }
   end
 
   private

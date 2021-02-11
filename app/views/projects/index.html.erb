@@ -1,11 +1,9 @@
 <h1>Project</h1>
 <% @projects.each do |project| %>
-  <% if project.user_id == session[:user_id]%>
-    <%= link_to project.name, project, target: :_blank %>
-    <%= link_to  "edit", edit_project_path(project) %>
-    <%= link_to  "destroy", project, method: :delete, data: { confirm: 'Are you sure?' } %>
-  <% end %>
-  <br />
+  <%= link_to project.name, project, target: :_blank %>
+  <%= link_to  "edit", edit_project_path(project) %>
+  <%= link_to  "destroy", project, method: :delete, data: { confirm: 'Are you sure?' } %>
+<br />
 <% end %> 
 <br />
 

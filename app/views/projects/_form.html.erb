@@ -1,0 +1,19 @@
+  <%= form_for(@project, class: "shadow p-3 mb-3 bg-dark rounded", local: true, validate: true) do |f| %>
+    <% if @project.errors.any? %>
+      <h2>Errors: </h2>
+      <ul>
+        <% @project.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>  
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :name, class: "col-2 col-form-label text-light" %>
+      <%= f.text_field :name, class: "form-control shadow rounded", placeholder: "Enter a project name" %>
+    </div>
+    <div class="form-group row justify-content-center">
+      <%= f.submit("Save",class: "btn btn-success btn-lg") %>
+    </div>
+  <% end %>
+</div>

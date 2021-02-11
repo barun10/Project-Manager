@@ -1,9 +1,7 @@
-<div class = "container m-3">
-  <%if current_user %>
-    <%= render 'show' %>
-  <% else %>
-    <%= link_to 'Sign up', new_user_path, class: "btn btn-primary btn-block m-3" %>
-    <%= link_to 'Log in', login_path, class: "btn btn-success btn-block m-3" %>
-    <%= link_to 'Sign in using outlook', "/auth/microsoft_graph_auth", method: :post, class: "btn btn-primary btn-block m-3" %> 
-  <% end %>
-</div>
+<%if current_user %>
+  <%= render 'show' %>
+<% else %>
+  <%= link_to 'Sign up', new_user_path, class: "btn btn-primary btn-block m-3" %>
+  <%= link_to 'Log in', login_path, class: "btn btn-success btn-block m-3" %>
+  <%= link_to 'Sign in using outlook', "/auth/microsoft_graph_auth", method: :post, class: "btn btn-primary btn-block m-3" %> 
+<% end %>
