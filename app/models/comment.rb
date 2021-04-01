@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
+# Service to download ftp files from the server
 class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :feature
 
   validates :comment, presence: true
-  
-  after_commit :create_notifications, on: [:create, :update]
 
+  after_commit :create_notifications, on: %i[create update]
 
   def create_notifications
-    self.feature.users.each do |user|
+    feature.users.each do |user|
       Notification.create(notify_type: 'comment', actor: self.user,
                           user: user, target: self)
     end

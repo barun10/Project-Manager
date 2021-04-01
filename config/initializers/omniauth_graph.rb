@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'microsoft_graph_auth'
 
 Rails.application.config.middleware.use OmniAuth::Builder do

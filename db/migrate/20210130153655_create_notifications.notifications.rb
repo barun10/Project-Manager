@@ -1,6 +1,7 @@
 # frozen_string_literal: true
-# This migration comes from notifications (originally 20160328045436)
 
+# This migration comes from notifications (originally 20160328045436)
+# Service to download ftp files from the server
 class CreateNotifications < ActiveRecord::Migration[5.2]
   def change
     create_table :notifications do |t|

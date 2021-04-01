@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'omniauth-oauth2'
 
 module OmniAuth
@@ -7,7 +9,7 @@ module OmniAuth
     class MicrosoftGraphAuth < OmniAuth::Strategies::OAuth2
       option :name, :microsoft_graph_auth
 
-      DEFAULT_SCOPE = 'openid email profile User.Read'.freeze
+      DEFAULT_SCOPE = 'openid email profile User.Read'
 
       # Configure the Microsoft identity platform endpoints
       option :client_options,

@@ -1,5 +1,7 @@
-class CommentMailer < ApplicationMailer
+# frozen_string_literal: true
 
+# Service to download ftp files from the server
+class CommentMailer < ApplicationMailer
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
@@ -9,6 +11,6 @@ class CommentMailer < ApplicationMailer
     @user = params[:user]
     @feature = params[:feature]
     @comment = params[:comment]
-    mail to: @user.email, subject: "Comment added/edited" 
+    mail to: @user.email, subject: 'Comment added/edited'
   end
 end

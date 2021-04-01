@@ -16,7 +16,7 @@ default: &default
   username: barun
   password: Pass@1234
   socket: /var/run/mysqld/mysqld.sock
-
+  strict: false
 development:
   <<: *default
   database: task_master_development
