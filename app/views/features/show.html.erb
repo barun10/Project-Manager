@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card m-3 p-3">
     Title: <%= @feature.title %>
     <br>
     <br>
@@ -15,14 +15,14 @@
     <br>
     <br>
     Users: <%= h @feature.users.collect {|r| r.name}.join(', ') %>
-
-    <%= link_to  "Download", @feature.file, download: " " %>
+    <%= link_to  "Download", @feature.file if !@feature.file %>
+    <div>
+      <%= link_to  "edit", edit_project_feature_path(@project, @feature), class: "btn btn-outline-dark" %>
+      <%= link_to 'destroy', [@project, @feature], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+    </div>
 </div>
 
-<div>
-  <%= link_to  "edit", edit_project_feature_path(@project, @feature) %>
-  <%= link_to 'destroy', [@project, @feature], method: :delete, data: { confirm: 'Are you sure?' } %>
-</div>
+
 
 
 <div>
@@ -40,12 +40,12 @@
       <%= f.check_box :status, value: task.status %>
       <%= f.text_field :description, placeholder: "Edit task" %>
       <% if task.status %>
-        <%= f.submit("Undo") %>
+        <%= f.submit("Undo", class: "btn btn-primary") %>
       <% else %>
-        <%= f.submit("Done") %>
+        <%= f.submit("Done", class: "btn btn-primary") %>
       <% end %>
     <% end %>
-    <%= link_to 'destroy', task , method: :delete, data: { confirm: 'Are you sure?' } %> 
+    <%= link_to 'destroy', task , method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger' %> 
     <br>   
   <% end %>
   <br>
@@ -66,7 +66,7 @@
     <% end %>
     <p><%= f.text_field :description, placeholder: "Enter your task" %></p>
     <%= f.hidden_field :feature_id, value: @feature.id  %>
-    <%= f.submit("Add Task") %>
+    <%= f.submit("Add Task", class: "btn btn-primary") %>
   <% end %>
 </div>
 
@@ -81,7 +81,7 @@
       <%= comment.comment.to_s.tr('@','') %>
       <% if current_user == comment.user %>
         <%= link_to 'edit', edit_comment_path(comment) %>
-        <%= link_to 'delete', comment , method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'delete', comment , method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger' %>
       <% end %>
       <br>
   <% end %>
@@ -100,7 +100,7 @@
     <p><%= f.text_field :comment, placeholder: "Enter your comment", class: "mention" %></p>
     <%= f.hidden_field :feature_id, value: @feature.id  %>
     <%= f.hidden_field :user_id, value: session[:user_id]  %>
-    <%= f.submit("Add Comment") %>
+    <%= f.submit("Add Comment", class: "btn btn-primary") %>
   <% end %>
 </div>
 

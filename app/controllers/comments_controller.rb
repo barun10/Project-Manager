@@ -18,7 +18,6 @@ class CommentsController < ApplicationController
   def edit; end
 
   def update
-    set_feature
     if @comment.update(comment_params)
       mail_comment
       redirect_to project_feature_path(@feature.project_id, @comment.feature_id), flash: { notice: 'comment updated' }

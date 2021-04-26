@@ -13,7 +13,7 @@ RSpec.describe Comment, type: :model do
       comment.comment = nil
       expect(comment.save).to eq(false)
     end
-    it 'should save comment successfully' do
+    it 'saves comment successfully' do
       expect(comment.save).to eq(true)
     end
   end

@@ -37,18 +37,22 @@
           <div class="card-body">
             <% @project.features.each do |feature| %>
               <% if feature.panel_name == "current" %>
-                <div class="border m-2 ">
-                  Title: <%= feature.title %>
+                <div class="border m-3 p-3">
+                  <b>Title:</b> <%= feature.title %>
                   <br>
-                  status: <%= feature.status %>
+                  <b>status:</b> <%= feature.status %>
                   <br>
-                  <%= link_to  "Show", [@project, feature] %>
+                  <div class="m-3">
+                    <%= link_to  "Show", [@project, feature], class: "btn btn-primary" %>
+                  </div>
                 </div>
               <% end %>
             <% end %>
           </div>
           <br>
-          <%= link_to  "+ Add Feature", new_project_feature_path(@project) %>
+          <div class= "m-3" >
+            <%= link_to  "+ Add Feature", new_project_feature_path(@project), class: "btn btn-success m-3" %>   
+          </div>
         </div>
       </div>
 
@@ -64,18 +68,22 @@
           <div class="card-body">
             <% @project.features.each do |feature| %>
               <% if feature.panel_name == "backlog" %>
-                <div class="border">
-                  Title: <%= feature.title %>
+                <div class="border m-3 p-3">
+                  <b>Title:</b> <%= feature.title %>
                   <br>
-                  status: <%= feature.status %>
+                  <b>status:</b> <%= feature.status %>
                   <br>
-                  <%= link_to  "Show", [@project, feature] %>
+                  <div class="m-3">
+                    <%= link_to  "Show", [@project, feature], class: "btn btn-primary" %>
+                  </div>
                 </div>
               <% end %>
             <% end %>
           </div>
           <br>
-          <%= link_to  "+ Add Feature", new_project_feature_path(@project) %>
+          <div class= "m-3" >
+            <%= link_to  "+ Add Feature", new_project_feature_path(@project), class: "btn btn-success m-3" %>   
+          </div>
         </div>
       </div>
 
@@ -91,18 +99,22 @@
           <div class="card-body">
             <% @project.features.each do |feature| %>
               <% if feature.panel_name == "icebox" %>
-                <div class="border">
-                  Title: <%= feature.title %>
+                <div class="border m-3 p-3">
+                  <b>Title:</b> <%= feature.title %>
                   <br>
-                  status: <%= feature.status %>
+                  <b>status:</b> <%= feature.status %>
                   <br>
-                  <%= link_to  "Show", [@project, feature] %>
+                  <div class="m-3">
+                    <%= link_to  "Show", [@project, feature], class: "btn btn-primary" %>
+                  </div>
                 </div>
               <% end %>
             <% end %>
           </div>
           <br>
-          <%= link_to  "+ Add Feature", new_project_feature_path(@project) %>
+          <div class= "m-3" >
+            <%= link_to  "+ Add Feature", new_project_feature_path(@project), class: "btn btn-success m-3" %>   
+          </div>
         </div>
       </div>
 

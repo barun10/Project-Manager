@@ -12,7 +12,7 @@ RSpec.describe Task, type: :model do
       task.description = nil
       expect(task.save).to eq(false)
     end
-    it 'should save task successfully' do
+    it 'saves task successfully' do
       expect(task.save).to eq(true)
     end
   end
@@ -22,7 +22,7 @@ RSpec.describe Task, type: :model do
       tasks.last(2).map { |t| t.update(status: true) }
     end
 
-    it 'should return completed tasks' do
+    it 'returns completed tasks' do
       expect(Task.completed.size).to eq(2)
     end
   end

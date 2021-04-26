@@ -23,7 +23,7 @@ RSpec.describe Feature, type: :model do
       feature.status = nil
       expect(feature.save).to eq(false)
     end
-    it 'should save feature successfully' do
+    it 'saves feature successfully' do
       expect(feature.save).to eq(true)
     end
   end

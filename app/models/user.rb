@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :email, presence: true,
                     uniqueness: { case_sensitive: false },
                     format: { with: EMAIL_REGEX }

@@ -10,7 +10,8 @@ class CreateFeatures < ActiveRecord::Migration[5.2]
       t.string :description, null: false
       t.string :panel_name
       t.integer :ticket_id, null: false, unique: true
-      t.string :file
+      t.string :file, default: ' '
+      #Ex:- :default =>''
       t.integer :status, default: 0
       t.timestamps
     end

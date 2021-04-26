@@ -1,8 +1,8 @@
 <h4>Hi, <%= current_user.name %>!</h4>
 <br>
-<%= link_to pluralize(Notification.unread_count(current_user), 'Notification'), notifications_path %>
+<%= link_to pluralize(Notification.unread_count(current_user), 'Notification'), notifications_path, class: "text-dark" %>
 <br>  
-<%= link_to 'My projects', projects_path %>
+<%= link_to 'My projects', projects_path, class: "font-weight-bolder"%>
 <br>
 <br>
 <p>Associated features</p>
@@ -12,4 +12,4 @@
 <% end %>
 <br>
 <br>
-<%= link_to 'Log out', logout_path%>
+<%= link_to 'Log out', logout_path, class: "btn btn-danger" %>

@@ -9,7 +9,7 @@ class Feature < ApplicationRecord
   has_and_belongs_to_many :users
   has_many :comments, dependent: :destroy
 
-  validates :title, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 10 }
+  validates :title, presence: true, uniqueness: { case_sensitive: false }
   validates :description, presence: true
   validates :status, presence: true
   validates :panel_name, presence: true

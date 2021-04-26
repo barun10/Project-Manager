@@ -12,7 +12,7 @@ class FeaturesController < ApplicationController
 
   def create
     @feature = @project.features.build(feature_params)
-    @feature.ticket_id = Integer(rand.to_s[2..9])
+    @feature.ticket_id = Faker::Bank.account_number(digits: 8)
     @feature.users << User.find(params[:users]) unless params[:users].nil?
     if @feature.save
       redirect_to project_path(@project), flash: { success: 'new feature added' }

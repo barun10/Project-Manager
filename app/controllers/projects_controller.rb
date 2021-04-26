@@ -52,12 +52,9 @@ class ProjectsController < ApplicationController
   end
 
   def require_login
-    unless logged_in?
-      redirect_to login_path, flash: { notice: 'please login first' }
-    end
+    redirect_to login_path, flash: { notice: 'please login first' } unless logged_in?
   end
 
-  
   def set_project
     @project = Project.find(params[:id])
   end
