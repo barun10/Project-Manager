@@ -47,10 +47,10 @@ ActiveRecord::Schema.define(version: 2021_01_30_153655) do
     t.bigint "project_id"
     t.string "title", null: false
     t.string "description", null: false
-    t.string "panel_name"
+    t.integer "panel_name", default: 0, null: false
     t.integer "ticket_id", null: false
     t.string "file", default: " "
-    t.integer "status", default: 0
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_features_on_project_id"
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 2021_01_30_153655) do
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

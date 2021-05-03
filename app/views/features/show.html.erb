@@ -11,11 +11,14 @@
     Status: <%= @feature.status %>
     <br>
     <br>
+    Panel: <%= @feature.panel_name %>
+    <br>
+    <br>
     Project_id: <%= @feature.project_id %>
     <br>
     <br>
     Users: <%= h @feature.users.collect {|r| r.name}.join(', ') %>
-    <%= link_to  "Download", @feature.file if !@feature.file %>
+    <%= link_to  "Download", @feature.file if @feature.file.attached?%>
     <div>
       <%= link_to  "edit", edit_project_feature_path(@project, @feature), class: "btn btn-outline-dark" %>
       <%= link_to 'destroy', [@project, @feature], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>

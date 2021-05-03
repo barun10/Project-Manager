@@ -38,12 +38,10 @@ gem 'ruby-json', '~> 1.1', '>= 1.1.2'
 gem 'httparty', '~> 0.17.1'
 gem 'omniauth-oauth2', '~> 1.6'
 gem 'omniauth-rails_csrf_protection', '~> 0.1.2'
+gem 'omniauth', '~> 1'
 # Session storage in database
 gem 'activerecord-session_store', '~> 1.1'
 
-# Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
-# gem 'bootstrap-multiselect-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
