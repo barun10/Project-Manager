@@ -1,10 +1,12 @@
 <h1>My Project(s)</h1>
 <% @projects.each do |project| %>
-  <%= link_to project.name, project, target: :_blank,class: "font-weight-bolder" %>
+  <div>
+   <%= link_to project.name, project, target: :_blank,class: "font-weight-bolder" %>
   <%= link_to  "edit", edit_project_path(project),class: "btn btn-outline-dark" %>
   <%= link_to  "destroy", project, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-danger" %>
+  </div>
 <br />
 <% end %> 
 <br />
-
+<br>
 <%= link_to 'Add Project +', new_project_path,  class: 'btn btn-success btn-lg'  %>
