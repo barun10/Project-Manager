@@ -2,11 +2,20 @@
 <% @projects.each do |project| %>
   <div>
    <%= link_to project.name, project, target: :_blank,class: "font-weight-bolder" %>
-  <%= link_to  "edit", edit_project_path(project),class: "btn btn-outline-dark" %>
-  <%= link_to  "destroy", project, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-danger" %>
+    <%= link_to  "edit", edit_project_path(project),class: "btn btn-outline-dark" %>
+    <%= link_to  "destroy", project, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-danger" %>
   </div>
-<br />
-<% end %> 
-<br />
-<br>
+  <br>
+<% end %>
+
+<% if @array %>
+  <% @associatedprojects.each do |project| %>
+    <div>
+      <% unless project.user == current_user%>
+        <%= link_to project.name, project, target: :_blank,class: "font-weight-bolder" %>
+      <% end %>
+    </div>
+    <br>
+  <% end %>
+<% end %>
 <%= link_to 'Add Project +', new_project_path,  class: 'btn btn-success btn-lg'  %>

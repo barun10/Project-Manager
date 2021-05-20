@@ -36,7 +36,7 @@
           </div>
           <div class="card-body">
             <% @project.features.each do |feature| %>
-              <% if feature.panel_name == "current" %>
+              <% if feature.panel_name == "current" && ((feature.users.include? current_user) || (current_user == feature.project.user)) %>
                 <div class="border m-3 p-3">
                   <b>Title:</b> <%= feature.title %>
                   <br>
@@ -67,7 +67,7 @@
           </div>
           <div class="card-body">
             <% @project.features.each do |feature| %>
-              <% if feature.panel_name == "backlog" %>
+              <% if feature.panel_name == "backlog" && ((feature.users.include? current_user) || (current_user == feature.project.user)) %>
                 <div class="border m-3 p-3">
                   <b>Title:</b> <%= feature.title %>
                   <br>
@@ -98,7 +98,7 @@
           </div>
           <div class="card-body">
             <% @project.features.each do |feature| %>
-              <% if feature.panel_name == "icebox" %>
+              <% if feature.panel_name == "icebox" && ((feature.users.include? current_user) || (current_user == feature.project.user)) %>
                 <div class="border m-3 p-3">
                   <b>Title:</b> <%= feature.title %>
                   <br>

@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
 # Service to download ftp files from the server
+include SessionsHelper
 class FeaturesController < ApplicationController
+  before_action :require_login
   before_action :set_project
   before_action :set_feature, only: %i[show edit update destroy]
   before_action :set_user, only: %i[new create edit update]
-
+  after_action :feature_status_change, except: %i[destroy]
+  before_action :require_authorization, only: %i[show edit update destroy]
   def new
     @feature = @project.features.build
   end
@@ -34,7 +37,6 @@ class FeaturesController < ApplicationController
   def update
     @feature.users.clear
     @feature.users << User.find(params[:users]) unless params[:users].nil?
-
     @old_status = @feature.status
     if @feature.update(feature_params)
       send_feature_status_change_email
@@ -72,6 +74,22 @@ class FeaturesController < ApplicationController
       @feature.users.each do |user|
         FeatureMailer.with(feature: @feature, user: user).feature_status_updated.deliver_later
       end
+    end
+  end
+  def feature_status_change
+    unless @feature.status == "completed" || @feature.status == "delivered"
+      if @feature.tasks.completed.count > 0
+        @feature.status = "started"
+        @feature.save
+      end
+    end
+  end
+  def require_login
+    redirect_to login_path, flash: { notice: 'please login first' } unless logged_in?
+  end
+  def require_authorization
+    unless (@feature.users.include? current_user) || (current_user == @feature.project.user)
+      redirect_to login_path, flash: { danger: 'You are not authorized to access the page' }
     end
   end
 end

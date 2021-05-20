@@ -5,11 +5,4 @@
 <%= link_to 'My projects', projects_path, class: "font-weight-bolder"%>
 <br>
 <br>
-<p>Associated features</p>
-<% current_user.features.each do |feature| %>
-  <%= link_to feature.title, project_feature_path(feature.project_id, feature.id) %>
-  <br>
-<% end %>
-<br>
-<br>
 <%= link_to 'Log out', logout_path, class: "btn btn-danger" %>

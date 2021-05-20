@@ -1,6 +1,7 @@
-<br>
 <div>
-  <%= notification.actor.name %> commented <%= notification.target.comment.tr('@', '') %> in feature <%= notification.target.feature.title %>
-  <br>
+  <div class = "border border-primary m-3 p-3 rounded">
+    <%= notification.actor.name %> commented
+    &quot;<b><%= notification.target.comment.tr('@', '') %></b>&quot; in feature 
+    <b><%= notification.target.feature.title %></b>
+  </div>
 </div>
-<br>

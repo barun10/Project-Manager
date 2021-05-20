@@ -42,7 +42,7 @@
     
   <div class="form-group">
     Users: <%= select_tag("users[]", options_for_select(@users.map { |ff| [ff.name, ff.id] }, @feature.users.map { |fs| fs.id }),
-      {:multiple=>true, :id => "users"}) %>
+      {:multiple=>true, :id => "users" }) %>
   </div>
 
   <div class="form-group">
