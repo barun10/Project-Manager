@@ -40,7 +40,7 @@ gem 'omniauth', '~> 1'
 gem 'omniauth-oauth2', '~> 1.6'
 gem 'omniauth-rails_csrf_protection', '~> 0.1.2'
 # Session storage in database
-gem 'activerecord-session_store', '~> 1.1'
+gem 'activerecord-session_store', '~> 2.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
