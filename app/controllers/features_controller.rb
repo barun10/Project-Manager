@@ -7,8 +7,6 @@ class FeaturesController < ApplicationController
   before_action :set_project
   before_action :set_feature, only: %i[show edit update destroy]
   before_action :set_user, only: %i[new create edit update]
-  after_action :feature_status_change, except: %i[destroy]
-  before_action :require_authorization, only: %i[show edit update destroy]
   def new
     @feature = @project.features.build
   end
@@ -59,10 +57,12 @@ class FeaturesController < ApplicationController
 
   def set_feature
     @feature = @project.features.find(params[:id])
+    redirect_to root_path, flash: { notice: 'you are not authorized' } unless current_user.has_feature_access?(@feature)
   end
 
   def set_project
     @project = Project.find(params[:project_id])
+    redirect_to root_path, flash: { notice: 'you are not authorized' } unless current_user.has_project_access?(@project)
   end
 
   def set_user
@@ -76,20 +76,8 @@ class FeaturesController < ApplicationController
       end
     end
   end
-  def feature_status_change
-    unless @feature.status == "completed" || @feature.status == "delivered"
-      if @feature.tasks.completed.count > 0
-        @feature.status = "started"
-        @feature.save
-      end
-    end
-  end
+
   def require_login
     redirect_to login_path, flash: { notice: 'please login first' } unless logged_in?
-  end
-  def require_authorization
-    unless (@feature.users.include? current_user) || (current_user == @feature.project.user)
-      redirect_to login_path, flash: { danger: 'You are not authorized to access the page' }
-    end
   end
 end

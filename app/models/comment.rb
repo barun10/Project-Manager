@@ -8,7 +8,7 @@ class Comment < ApplicationRecord
   validates :comment, presence: true
 
   after_commit :create_notifications, on: %i[create update]
-  has_many :sent_notifications, class_name: "Notification", foreign_key: :target_id, dependent: :destroy
+  has_many :sent_notifications, class_name: 'Notification', foreign_key: :target_id, dependent: :destroy
   def create_notifications
     feature.users.each do |user|
       Notification.create(notify_type: 'comment', actor: self.user,

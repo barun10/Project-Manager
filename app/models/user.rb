@@ -12,4 +12,16 @@ class User < ApplicationRecord
   validates :email, presence: true,
                     uniqueness: { case_sensitive: false },
                     format: { with: EMAIL_REGEX }
+
+  def accessible_projects
+    features.map(&:project).uniq
+  end
+
+  def has_feature_access?(feature)
+    feature.users.include? self or self == feature.project.user
+  end
+
+  def has_project_access?(project)
+    projects.include? project or accessible_projects.include? project
+  end
 end

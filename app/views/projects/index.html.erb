@@ -7,15 +7,13 @@
   </div>
   <br>
 <% end %>
-
-<% if @array %>
-  <% @associatedprojects.each do |project| %>
-    <div>
-      <% unless project.user == current_user%>
-        <%= link_to project.name, project, target: :_blank,class: "font-weight-bolder" %>
-      <% end %>
-    </div>
-    <br>
-  <% end %>
+<h5>Accessible Projects</h5>
+<% current_user.accessible_projects.each do |project| %>
+  <div>
+    <% unless project.user == current_user%>
+      <%= link_to project.name, project, target: :_blank,class: "font-weight-bolder" %>
+    <% end %>
+  </div>
 <% end %>
+<br>
 <%= link_to 'Add Project +', new_project_path,  class: 'btn btn-success btn-lg'  %>

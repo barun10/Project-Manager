@@ -5,16 +5,8 @@ include SessionsHelper
 class ProjectsController < ApplicationController
   before_action :require_login
   before_action :set_project, only: %i[show edit update destroy]
-  before_action :require_authorization, only: %i[show edit update destroy]
   def index
-    current_user.features.each do |feature|
-      @array = []
-      @array << feature.project
-    end
-    if @array
-      @associatedprojects = @array.uniq
-    end
-    @projects = current_user.projects    
+    @projects = current_user.projects
   end
 
   def show
@@ -65,11 +57,6 @@ class ProjectsController < ApplicationController
 
   def set_project
     @project = Project.find(params[:id])
-  end
-
-  def require_authorization
-    unless (@project.features.any? {|feature| feature.users.include? current_user}) || (current_user == @project.user)
-      redirect_to login_path, flash: { danger: 'You are not authorized to access the page' }
-    end
+    redirect_to root_path, flash: { danger: 'you are not authorized' } unless current_user.has_project_access?(@project)
   end
 end
